@@ -24,6 +24,7 @@ public class PlayerMovement : MonoBehaviour
     private bool canShoot = true; 
     public float timer; 
     public float rateOffire = 1f; 
+    public AudioClip shootSound;
 
 
 
@@ -65,6 +66,8 @@ public class PlayerMovement : MonoBehaviour
 
         if(Input.GetButtonDown("Jump") && sensor.isGrounded == true)
         {
+            source.clip = jumpSound;
+             source.Play();
             rBody.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
             anim.SetBool("isJumping", true);
             //source.PlayOneShot(jumpSound);
@@ -110,6 +113,8 @@ public class PlayerMovement : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.F) && canShoot)
         {
+             source.clip = shootSound;
+             source.Play();
             anim.SetTrigger("isShooting");
             Instantiate(bulletPrefab, bulletSpawn.position, bulletSpawn.rotation); 
             canShoot = false; 

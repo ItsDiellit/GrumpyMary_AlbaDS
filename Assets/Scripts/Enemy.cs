@@ -7,8 +7,11 @@ public class Enemy : MonoBehaviour
     private Rigidbody2D rBody;
     private AudioSource source;
     private BoxCollider2D boxCollider;
+    public SpriteRenderer render;
 
     public AudioClip deathSound;
+    public AudioClip playerdeathSound;
+
 
     public float enemySpeed = 5;
 
@@ -17,6 +20,7 @@ public class Enemy : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
+        render = GetComponent<SpriteRenderer>();
         rBody = GetComponent<Rigidbody2D>();
         source = GetComponent<AudioSource>();
         boxCollider = GetComponent<BoxCollider2D>();
@@ -34,17 +38,21 @@ public class Enemy : MonoBehaviour
         {
             if(enemyDirection == 1)
             {
+                render.flipX = false;
                 enemyDirection = -1;
             }
             else if(enemyDirection == -1)
             {
+              render.flipX = true;
+
                 enemyDirection = 1;
             }
         }
 
         if(collision.gameObject.tag == "Player")
         {
-            Destroy(collision.gameObject);
+            source.PlayOneShot(playerdeathSound);
+            Destroy(collision.gameObject, 0.2f);
         }
         
     }

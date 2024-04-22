@@ -173,8 +173,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27dc284229fa775448d9e9fcad262df9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathSound: {fileID: 8300000, guid: 0b332dbd62a5a304c905de8069a61102, type: 3}
-  enemySpeed: 5
+  deathSound: {fileID: 8300000, guid: 7305dbdff1be3064ebaeef4735e5ca2e, type: 3}
+  playerdeathSound: {fileID: 8300000, guid: deb95cd17b2574642ad8cbb75e715eac, type: 3}
+  enemySpeed: 2
   enemyDirection: 1
 --- !u!82 &4086729623808739808
 AudioSource:
@@ -186,7 +187,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 59714faa1080d2e4d8d909038fc3671d, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -194,7 +195,7 @@ AudioSource:
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 128
+  Priority: 256
   DopplerLevel: 1
   MinDistance: 0.838351
   MaxDistance: 500

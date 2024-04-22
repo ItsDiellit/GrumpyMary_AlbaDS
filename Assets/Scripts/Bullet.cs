@@ -23,7 +23,7 @@ public class bullet : MonoBehaviour
         }
         if(collider.gameObject.tag == "Unicorn")
         {
-            Destroy(collider.gameObject);
+            Destroy(collider.gameObject, 0.5f);
         }
         Destroy(gameObject);
     }
