@@ -1,3 +1,4 @@
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,6 +17,8 @@ public class Enemy : MonoBehaviour
     public float enemySpeed = 5;
 
     public float enemyDirection = 1;
+    
+
 
     // Start is called before the first frame update
     void Awake()
@@ -51,8 +54,13 @@ public class Enemy : MonoBehaviour
 
         if(collision.gameObject.tag == "Player")
         {
-            source.PlayOneShot(playerdeathSound);
-            Destroy(collision.gameObject, 0.2f);
+            PlayerMovement playerScript = collision.gameObject.GetComponent<PlayerMovement>();
+
+            if(playerScript.isDeath == false)
+            {
+                playerScript.StartCoroutine("Die");
+            }
+            
         }
         
     }

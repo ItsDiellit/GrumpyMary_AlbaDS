@@ -7,25 +7,20 @@ using UnityEngine.SceneManagement;
 
 public class AbismoScript : MonoBehaviour
 {
-    private AudioSource source;
-    public AudioClip DeathSound;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-    source = GetComponent<AudioSource>();
-
-    }
-
     // Update is called once per frame
     void OnTriggerEnter2D(Collider2D Collider)
     {
         if(Collider.gameObject.tag == "Player")
         {
-        source.clip = DeathSound;
-        source.Play();
-            //SceneManager.LoadScene ("GameOver");
-            Destroy(Collider.gameObject, 1f);
+        PlayerMovement playerScript = Collider.gameObject.GetComponent<PlayerMovement>();
+         
+          //playerScript.Death();
+
+          if(playerScript.isDeath == false)
+          {
+            
+            playerScript.StartCoroutine("Die");
+            }
         }
     }
 

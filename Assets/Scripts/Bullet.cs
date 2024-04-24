@@ -23,7 +23,9 @@ public class bullet : MonoBehaviour
         }
         if(collider.gameObject.tag == "Unicorn")
         {
-            Destroy(collider.gameObject, 0.5f);
+            Enemy Unicorn = collider.gameObject.GetComponent<Enemy>();
+
+            Unicorn.UnicornDeath();
         }
         Destroy(gameObject);
     }

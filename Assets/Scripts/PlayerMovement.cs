@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -9,7 +10,7 @@ public class PlayerMovement : MonoBehaviour
     public SpriteRenderer render;
     public Animator anim;
     AudioSource source;
-
+    public AudioClip deathSound;
     public Vector3 newPosition = new Vector3(50, 5, 0);
 
     public float movementSpeed = 5;
@@ -25,7 +26,9 @@ public class PlayerMovement : MonoBehaviour
     public float timer; 
     public float rateOffire = 1f; 
     public AudioClip shootSound;
+    public AudioSource lvl1Music;
 
+    public bool isDeath = false;
 
 
     void Awake()
@@ -75,12 +78,14 @@ public class PlayerMovement : MonoBehaviour
         
         if(inputHorizontal < 0)
         {
-            render.flipX = true;
+            //render.flipX = true;
+            transform.rotation = Quaternion.Euler(0, 180, 0);
             anim.SetBool("isRunning", true);
         }
         else if(inputHorizontal > 0)
         {
-            render.flipX = false;
+            //render.flipX = false;
+            transform.rotation = Quaternion.Euler(0, 0, 0);
             anim.SetBool("isRunning", true);
         }
         else
@@ -95,6 +100,15 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
+    public IEnumerator Die()
+    {
+        lvl1Music.Pause();
+        isDeath = true;
+        source.PlayOneShot(deathSound);
+        yield return new WaitForSeconds(2);
+        
+        SceneManager.LoadScene("GameOver");
+    }
     void FixedUpdate()
     {
         rBody.velocity = new Vector2(inputHorizontal * movementSpeed, rBody.velocity.y);
